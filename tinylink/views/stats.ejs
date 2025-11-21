@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TinyLink Stats - <%= code %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-darkBg min-h-screen p-6 font-sans text-white">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-neonBlue">Stats for: <%= code %></h1>
+
+    <div id="statsContainer" class="bg-gray-900 p-4 rounded-lg shadow-lg">
+      <p class="text-gray-400">Loading stats...</p>
+    </div>
+
+    <a href="/" class="inline-block mt-6 text-neonPink underline hover:brightness-125">Back to Dashboard</a>
+  </div>
+
+  <script>
+    async function loadStats() {
+      const code = "<%= code %>";
+      try {
+        const res = await fetch(`/api/links/${code}`);
+        const data = await res.json();
+        const container = document.getElementById("statsContainer");
+
+        if (!res.ok) {
+          container.innerHTML = `<p class="text-red-600">Error: ${data.error}</p>`;
+          return;
+        }
+
+        container.innerHTML = `
+          <p><strong>URL:</strong> <a class="text-neonBlue underline" href="${data.url}" target="_blank">${data.url}</a></p>
+          <p><strong>Clicks:</strong> <span class="text-neonGreen">${data.clicks}</span></p>
+          <p><strong>Last Clicked:</strong> <span class="text-neonYellow">${data.lastClicked || 'Never'}</span></p>
+          <p><strong>Created At:</strong> <span class="text-neonPink">${new Date(data.createdAt).toLocaleString()}</span></p>
+        `;
+      } catch (err) {
+        document.getElementById("statsContainer").innerHTML = `<p class="text-red-600">Error loading stats</p>`;
+      }
+    }
+
+    loadStats();
+  </script>
+</body>
+</html>

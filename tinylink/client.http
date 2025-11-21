@@ -1,0 +1,25 @@
+###############3
+curl -X GET http://localhost:3000/healthz
+###############3
+
+
+curl -X POST http://localhost:3000/api/links \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://google.com", "code": "google1"}'
+
+########
+
+curl -X GET http://localhost:3000/api/links
+########33
+curl -X GET http://localhost:3000/api/links/google1
+###########333
+
+curl -I http://localhost:3000/google1
+
+############33
+curl -X DELETE http://localhost:3000/api/links/google1
+
+#######33
+curl -I http://localhost:3000/google1
+
+####

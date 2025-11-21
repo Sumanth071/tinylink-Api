@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TinyLink Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-darkBg min-h-screen p-6 font-sans text-white">
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-4xl font-bold mb-6 text-neonBlue">TinyLink Dashboard</h1>
+
+    <!-- CREATE LINK FORM -->
+    <form id="createForm" class="bg-gray-900 p-4 rounded-lg shadow-lg mb-6 flex flex-col md:flex-row gap-4">
+      <input type="url" id="url" placeholder="Enter URL" class="border border-neonBlue p-2 rounded flex-1 bg-gray-800 text-white" required>
+      <input type="text" id="code" placeholder="Custom Code (6-8)" class="border border-neonPink p-2 rounded w-48 bg-gray-800 text-white">
+      <button type="submit" class="bg-neonBlue text-black px-4 py-2 rounded hover:brightness-125 shadow-lg">
+        Create
+      </button>
+    </form>
+
+    <!-- LINKS TABLE -->
+    <div class="bg-gray-900 rounded-lg shadow-lg overflow-x-auto">
+      <table class="w-full text-left">
+        <thead class="bg-gray-800">
+          <tr>
+            <th class="p-2 text-neonBlue">Code</th>
+            <th class="p-2 text-neonPink">URL</th>
+            <th class="p-2 text-neonGreen">Clicks</th>
+            <th class="p-2 text-neonYellow">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="linkTable">
+          <!-- Populated by script.js -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
